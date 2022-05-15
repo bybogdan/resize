@@ -1,0 +1,12 @@
+export const ACTIONS = {
+  ADD: 'ADD',
+  REMOVE: 'REMOVE',
+  UPDATE_POSITION: 'UPDATE_POSITION',
+  CLEAR: 'CLEAR',
+  PREPARE_LABEL: 'PREPARE_LABEL',
+}
+
+export const STATUSES = {
+  IDLE: 'IDLE',
+  READY: 'READY',
+}
