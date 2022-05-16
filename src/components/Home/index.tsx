@@ -36,14 +36,10 @@ const Home: React.FC = () => {
 
   const setIdle = () => setStatus(IDLE)
   const setLoading = () => setStatus(LOADING)
-  const setLoaded = () => {
+  const setLoaded = React.useCallback(() => {
     setTimeout(() => {
       setStatus(LOADED)
     }, 200)
-  }
-
-  const afterPreviewLoaded = React.useCallback((): void => {
-    setLoaded()
   }, [])
 
   const awaitPreviewLoad = React.useCallback((): void => {
@@ -54,7 +50,7 @@ const Home: React.FC = () => {
       const {width} = previewNode?.getBoundingClientRect() ?? {}
       isImageLoaded = width ? width > 0 : false
       if (isImageLoaded) {
-        afterPreviewLoaded()
+        setLoaded()
         clearInterval(interval)
       }
     }, 100)
@@ -65,7 +61,7 @@ const Home: React.FC = () => {
         setPreviewSrc('')
       }
     }, 2000)
-  }, [afterPreviewLoaded])
+  }, [setLoaded])
 
   const removePreview = (e: React.MouseEvent): void => {
     e.preventDefault()
